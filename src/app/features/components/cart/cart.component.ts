@@ -10,7 +10,7 @@ import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
-  imports: [LoaderComponent, RouterLink,CurrencyPipe],
+  imports: [RouterLink,CurrencyPipe],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })

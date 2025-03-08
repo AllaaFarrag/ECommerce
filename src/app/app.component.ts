@@ -7,7 +7,7 @@ import { FooterComponent } from "./core/layout/footer/footer.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavbarComponent, NgxSpinnerModule, FooterComponent],
+  imports: [RouterOutlet, NavbarComponent, NgxSpinnerModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
