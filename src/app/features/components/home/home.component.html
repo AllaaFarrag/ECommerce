@@ -1,0 +1,134 @@
+<div class="container mx-auto">
+  <app-hero></app-hero>
+  <app-slider-categories [categories]="allCategories"></app-slider-categories>
+  
+  
+  <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+  <div class="relative">
+      <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+          </svg>
+      </div>
+      <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos..." required [(ngModel)] = "searchValue" />
+  </div>
+
+
+  <div class="flex flex-wrap justify-center ">
+      @for (p of allProducts |search:searchValue; track $index) {
+          <div class="flex items-center justify-center mt-10 mx-auto">
+              
+              <div class="w-80 border border-blue-200 rounded-lg shadow-md p-4 mx-3">
+              <!-- Discount Badge -->
+              <div class="relative">
+                <!-- <span
+                  class="absolute top-2 left-2 bg-orange-400 text-white text-xs font-semibold px-2 py-1 rounded-full">
+                  -20%
+                </span> -->
+                <!-- Wishlist Icon -->
+                 <!-- @if (!isWishlisted(p.id)) {
+                   <button
+                   (click)="addToWishList(p._id)"
+                     class="absolute top-2 right-2 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center">
+                     <svg
+                       xmlns="http://www.w3.org/2000/svg"
+                       class="h-4 w-4"
+                       [class.text-red-500]="isWishlisted(p._id)"
+                       [attr.fill]="isWishlisted(p._id) ? 'currentColor' : 'none'"
+                       viewBox="0 0 24 24"
+                       stroke="currentColor"
+                       stroke-width="2">
+                       <path
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                     </svg>
+                   </button>
+                 }@else {
+                  <button
+                  (click)="removeFromWishList(p._id)"
+                    class="absolute top-2 right-2 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4"
+                      [class.text-red-500]="isWishlisted(p._id)"
+                      [attr.fill]="isWishlisted(p._id) ? 'currentColor' : 'none'"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                    </svg>
+                  </button>
+                 } -->
+
+                 <button (click)="isWishlisted(p.id) ? removeFromWishList(p.id) : addToWishList(p.id)"
+                 class="absolute top-2 right-2 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center">
+                 <svg xmlns="http://www.w3.org/2000/svg"
+                   class="h-4 w-4"
+                   [class.text-red-500]="isWishlisted(p.id)"
+                   [attr.fill]="isWishlisted(p.id) ? 'currentColor' : 'none'"
+                   viewBox="0 0 24 24"
+                   stroke="currentColor"
+                   stroke-width="2">
+                   <path stroke-linecap="round"
+                     stroke-linejoin="round"
+                     d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                 </svg>
+               </button>
+               
+                 <!-- Product Image -->
+              <div>
+                  <img
+                  [src]="p.imageCover"
+                  alt="Product Image"
+                  class="object-contain w-full h-[270px] fill"
+                  routerLink= '/single/{{p.id}}'
+                  />
+
+                <!-- routerLink= '/single/{{p.id}}' -->
+
+              </div>
+              
+              </div>
+            
+              <!-- Product Details -->
+              <div>
+                <h3 class="text-gray-800 font-medium text-base">
+                  {{p.title}}
+                </h3>
+                <p class="uppercase text-blue-600 text-xs font-medium">
+                  {{p.category.name | uppercase}}
+                </p>
+                <!-- Ratings -->
+                <div class="flex space-x-1 text-orange-500 text-sm mt-1">
+                    <i class="fa-solid fa-star rating-color"></i>
+                  {{p.ratingsAverage}}
+                </div>
+                <!-- Pricing -->
+                <div class="flex items-end justify-between">
+                  <div class="flex items-baseline space-x-2 mt-2">
+                  <span class="text-blue-600 text-xl font-semibold">{{p.price|currency:'EGP'}}</span>
+                  <!-- <span class="text-gray-400 text-sm line-through">$1500.00</span> -->
+                </div>
+                  <button (click)="addToCart(p.id)"
+                  class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center shadow text-white">
+                  <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 17h-11v-14h-2" /><path d="M6 5l14 1l-1 7h-13" /></svg>
+                </button>
+                </div>
+              </div>
+              </div>
+            
+            </div>
+      }
+  
+      <!-- @if(isLoading) {
+          <app-loader></app-loader>
+      } -->
+  
+  </div>
+</div>
+
+

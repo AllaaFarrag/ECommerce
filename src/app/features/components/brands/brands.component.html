@@ -1,0 +1,38 @@
+<div class="bg-white dark:bg-gray-800 justify-center items-center  h-screen p-5  flex flex-wrap gap-5">
+    @for (b of brands; track $index) {
+        <div class="bg-white shadow-lg rounded-lg p-6 w-80 relative text-center">
+       
+           <!-- Product Image -->
+           <img  
+           [src]="b.image" [alt]="b.name" class="mx-auto w-40 h-40 object-contain">
+       
+           <!-- Product Title -->
+           <h2 class="text-xl font-bold text-blue-600 mt-4">{{b.name}}</h2>
+       
+           <!-- Product Description -->
+           <p class="text-gray-500 text-sm mt-2">{{b.slug}}</p>
+       
+           <!-- Modal toggle -->
+           <a 
+           (click)="openModel(b)"
+           class="mt-4 inline-flex items-center gap-2 px-5 py-2 bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-700 transition">
+             Details
+           </a>
+         </div>  
+    }
+</div>
+
+<!-- Modal -->
+@if (isModelOpen) {
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-96">
+            <h2 class="text-xl font-bold text-blue-600">{{ selectedBrand?.name }}</h2>
+            <img [src]="selectedBrand?.image" [alt]="selectedBrand?.name" class="mx-auto w-40 h-40 object-contain mt-2">
+            <p class="text-gray-500 text-sm mt-2">{{ selectedBrand?.slug }}</p>
+
+            <button (click)="closeModel()" class="mt-4 px-5 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition">
+                Close
+            </button>
+        </div>
+    </div>
+}
